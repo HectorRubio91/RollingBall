@@ -17,6 +17,7 @@ public:
 	// Sets default values for this pawn's properties
 	ABall();
 	void SetBallController(AMyPlayerController* MyPlayerController);
+	void ApplyImpulse(const FVector& Impulse);
 	
 protected:
 	// Called when the game starts or when spawned
@@ -61,7 +62,10 @@ private:
 	
 	UPROPERTY(EditDefaultsOnly, Category= "Sounds")
 	USoundBase* JumpSound;
-
+	
+	UPROPERTY(EditDefaultsOnly, Category= "Sounds")
+	USoundBase* CoinSound;
+	
 	UPROPERTY()
 	AMyPlayerController* BallController;
 

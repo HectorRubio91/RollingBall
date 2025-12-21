@@ -58,6 +58,14 @@ void ABall::NotifyActorBeginOverlap(AActor* OtherActor)
 	if (OtherActor->ActorHasTag("Coin"))
 	{
 		BallController->UpdateScore();
+		BallController->AddTime(5.f);
+		
+		if (CoinSound)
+		{
+			
+			UGameplayStatics::SpawnSound2D(GetWorld(), CoinSound);
+		}
+		
 		OtherActor->Destroy();
 	}
 	else if (OtherActor->ActorHasTag("DeathZone"))
@@ -112,4 +120,12 @@ void ABall::OnDamageTaken(AActor* DamagedActor, float Damage, const class UDamag
 {
 	BallController->OnLoseLife();
 	this->Destroy();
+}
+
+void ABall::ApplyImpulse(const FVector& Impulse)
+{
+	if (MyMesh)
+	{
+		MyMesh->AddImpulse(Impulse);
+	}
 }

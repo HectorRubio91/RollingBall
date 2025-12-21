@@ -17,11 +17,20 @@ public:
 	void OnLoseLife();
 	void UpdateScore();
 	
+	void UpdateTimer();
+	void OnTimeOver();
+	
+	UFUNCTION(BlueprintCallable)
+	void AddTime(float ExtraTime);
+	
 	UFUNCTION(BlueprintImplementableEvent)
 	void UpdateUILives(int32 NewLives);
 
 	UFUNCTION(BlueprintImplementableEvent)
 	void UpdateUIScore(int32 NewScore);
+	
+	UFUNCTION(BlueprintImplementableEvent)
+	void UpdateUITime(float NewTime);
 	
 protected:
 	virtual void BeginPlay() override;
@@ -43,6 +52,18 @@ private:
 	//Una clase, no una instancia
 	UPROPERTY(EditAnywhere, Category= "Widget")
 	TSubclassOf<UUserWidget> GameOverWidgetClass;
+	
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category= "Data", meta = (AllowPrivateAccess = "true"))
+	float MaxTime = 90.f;
+	
+	UPROPERTY(BlueprintReadOnly, Category= "Data", meta = (AllowPrivateAccess = "true"))
+	float CurrentTime;
+	
+	FTimerHandle TimerHandle;
 
 	void GameOver();
+	
+	UPROPERTY(EditDefaultsOnly, Category= "Sounds")
+	USoundBase* DeathSound;
+
 };
