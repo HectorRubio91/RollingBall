@@ -1,0 +1,15 @@
+#Unreal Engine
+Binaries/
+DerivedDataCache/
+Intermediate/
+Saved/
+.vscode/
+.vs/
+
+# Build
+*.sln
+*.xcodeproj
+
+# OS
+.DS_Store
+Thumbs.db
